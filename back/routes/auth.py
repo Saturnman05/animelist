@@ -7,10 +7,10 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from pydantic import BaseModel
 
-from ..database import get_db_connection, Database
-from ..models.user import UserCreate
-from ..utils.hash_password import hash_password, verify_password
-from ..utils.security import create_access_token
+from database import get_db_connection, Database
+from models.user import UserCreate
+from utils.hash_password import hash_password, verify_password
+from utils.security import create_access_token
 
 
 class Token(BaseModel):

@@ -4,9 +4,9 @@ from fastapi import HTTPException, Security
 from fastapi.security import OAuth2PasswordBearer
 import jwt
 
-from ..database import Database
-from ..utils.consts import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from ..models.user import User
+from database import Database
+from utils.consts import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from models.user import User
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):

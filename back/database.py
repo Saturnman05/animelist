@@ -1,7 +1,7 @@
 import aiomysql
 from aiomysql import Error as ConnectionError
 
-from .utils.consts import DATABASE_HOST, DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD
+from utils.consts import DATABASE_HOST, DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD
 
 
 async def get_db_connection():

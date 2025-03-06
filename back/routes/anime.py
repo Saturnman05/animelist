@@ -2,9 +2,9 @@ from aiomysql import Error as ConnectionError, DictCursor
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from ..database import Database
-from ..utils.security import get_current_user
-from ..models.anime import AnimeCreate, AnimeUpdate
+from database import Database
+from utils.security import get_current_user
+from models.anime import AnimeCreate, AnimeUpdate
 
 router = APIRouter()
 

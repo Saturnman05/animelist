@@ -1,1 +1,25 @@
-<p>login works!</p>
+<mat-card class="login-container">
+    <mat-card-title>Iniciar Sesión</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="email" name="email" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" name="password" type="password" required>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid" onclick="onLogin()">
+                Login
+            </button>
+
+            <div>
+                <a mat-button>Recuperar contraseña</a>
+                <a mat-button>Cambiar contraseña</a>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

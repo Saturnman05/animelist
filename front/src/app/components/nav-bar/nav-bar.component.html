@@ -1,0 +1,22 @@
+<mat-toolbar>
+    <a mat-button>
+        <span>My Anime List</span>
+    </a>
+
+    <span class="example-spacer"></span>
+
+    <a mat-button><span>Listas</span></a>
+
+    <a mat-button><span>Géneros</span></a>
+
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Cerrar Sesión</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

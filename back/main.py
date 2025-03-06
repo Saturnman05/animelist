@@ -2,16 +2,16 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from .database import Database
+from database import Database
 
-from .routes.test_vercel import router as test_vercel_router
-from .routes.user import router as user_router
-from .routes.auth import router as auth_router
-from .routes.genre import router as genre_router
-from .routes.anime_list import router as list_router
-from .routes.anime_genre import router as anime_genre_router
-from .routes.anime import router as anime_router
-from .routes.anime_lists_animes import router as anime_lists_animes_router
+from routes.test_vercel import router as test_vercel_router
+from routes.user import router as user_router
+from routes.auth import router as auth_router
+from routes.genre import router as genre_router
+from routes.anime_list import router as list_router
+from routes.anime_genre import router as anime_genre_router
+from routes.anime import router as anime_router
+from routes.anime_lists_animes import router as anime_lists_animes_router
 
 
 @asynccontextmanager
