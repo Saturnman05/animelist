@@ -39,6 +39,21 @@ mat-spinner {
   min-height: 400px; /* Un poco más de espacio para cuando está cargando */
 }
 
+.scroll-trigger {
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
+.end-message {
+  text-align: center;
+  padding: 20px 0;
+  font-style: italic;
+  color: #666;
+  width: 100%;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .anime-grid {

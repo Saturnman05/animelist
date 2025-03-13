@@ -50,7 +50,7 @@ export class ListAnimesComponent implements OnInit {
     this.loading = true;
     this.animeService.getAnimes().subscribe({
       next: (mappedAnimes) => {
-        this.animes = mappedAnimes;
+        this.animes = mappedAnimes.animes;
         this.loading = false;
       },
       error: (error) => {

@@ -1,9 +1,20 @@
 <div class="anime-grid-container">
     <div class="anime-grid">
-        @for (anime of animes; track anime.id) {
+        @for (anime of animes; track anime.title) {
         <app-anime-card [anime]="anime" />
         } @empty {
         <mat-spinner></mat-spinner>
         }
     </div>
 </div>
+
+<!-- Elemento para detectar cuando llegamos al final -->
+@if (!loading && hasMoreAnimes) {
+<div #scrollTrigger class="scroll-trigger">
+    <mat-spinner diameter="40"></mat-spinner>
+</div>
+} @else if (!hasMoreAnimes && animes.length > 0) {
+<div class="end-message">
+    No hay más animes para mostrar
+</div>
+}

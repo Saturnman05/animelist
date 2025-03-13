@@ -34,12 +34,20 @@ export class JikanAnimeService {
     return response;
   }
 
-  getAnimes(): Observable<Anime[]> {
-    return this.http.get<JikanResponse>(this.API_URL).pipe(
-      map((response: JikanResponse) => {
-        return response.data.map(this.mapToAnime);
-      })
-    );
+  getAnimes(
+    page: number = 1,
+    limit: number = 25
+  ): Observable<{ animes: Anime[]; hasNextPage: boolean }> {
+    return this.http
+      .get<JikanResponse>(`${this.API_URL}?page=${page}&limit=${limit}`)
+      .pipe(
+        map((response: JikanResponse) => {
+          return {
+            animes: response.data.map(this.mapToAnime),
+            hasNextPage: response.pagination.has_next_page,
+          };
+        })
+      );
   }
 
   private mapToAnime(item: JikanAnime): Anime {

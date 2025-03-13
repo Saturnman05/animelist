@@ -38,5 +38,3 @@ export interface JikanAnime {
   }[];
   // Otros campos que vienen en la respuesta
 }
-
-export type JikanAnimeResponse = JikanAnime & JikanResponse;
