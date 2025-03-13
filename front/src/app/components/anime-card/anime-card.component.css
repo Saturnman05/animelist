@@ -1,0 +1,58 @@
+/* anime-card.component.css */
+
+:host {
+  display: inline-block;
+  transition: transform 0.3s;
+  margin: 10px;
+}
+
+:host:hover {
+  transform: translateY(-5px);
+}
+
+.display-card {
+  width: 115px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+.display-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+mat-card-content {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+mat-card-image {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+mat-card-header {
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 150px; /* Limitamos el ancho máximo del título */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #f5f5f5;
+  border-radius: 0 0 8px 8px;
+  box-sizing: border-box; /* Asegura que el padding no añada ancho extra */
+}
+
+.anime-card-container {
+  display: inline-block;
+  width: auto;
+  max-width: 150px; /* También limitamos el contenedor al mismo ancho */
+}

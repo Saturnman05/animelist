@@ -1,10 +1,11 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+
+import { environment } from '../../../environments/environment';
 import { LoginRequest } from '../../models/login-request.model';
 import { LoginResponse } from '../../models/login-response.model';
 import { TokenService } from '../token/token.service';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +21,21 @@ export class AuthService {
   }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
+    const body = new HttpParams()
+      .set('username', credentials.username)
+      .set('password', credentials.password);
+
+    const headers = new HttpHeaders({
+      'Content-type': 'application/x-www-form-urlencoded',
+    });
+
     return this.http
-      .post<LoginResponse>(`${this.API_URL}/login`, credentials)
+      .post<LoginResponse>(`${this.API_URL}/login`, body.toString(), {
+        headers,
+      })
       .pipe(
         tap((response) => {
-          this.tokenService.saveToken(response.acces_token);
+          this.tokenService.saveToken(response.access_token);
           this.isAuthenticatedSubject.next(true);
         })
       );

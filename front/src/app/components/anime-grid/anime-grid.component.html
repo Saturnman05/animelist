@@ -1,0 +1,9 @@
+<div class="anime-grid-container">
+    <div class="anime-grid">
+        @for (anime of animes; track anime.title) {
+        <app-anime-card [anime]="anime" />
+        } @empty {
+        <div>Loading...</div>
+        }
+    </div>
+</div>

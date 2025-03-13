@@ -13,6 +13,8 @@ from routes.anime_genre import router as anime_genre_router
 from routes.anime import router as anime_router
 from routes.anime_lists_animes import router as anime_lists_animes_router
 
+from fastapi.middleware.cors import CORSMiddleware
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -28,6 +30,16 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Anime API", lifespan=lifespan)
+
+origins = ["http://localhost:4200"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(test_vercel_router, prefix="/api/testvercel")
 

@@ -1,19 +1,23 @@
 <mat-toolbar>
-    <a mat-button>
+    <a mat-button [routerLink]="['/animes']">
         <span>My Anime List</span>
     </a>
 
     <span class="example-spacer"></span>
 
-    <a mat-button><span>Listas</span></a>
+    <a mat-button [routerLink]="['/lists']"><span>Listas</span></a>
 
-    <a mat-button><span>Géneros</span></a>
+    <a mat-button [routerLink]="['/genres']"><span>Géneros</span></a>
 
     <button mat-icon-button [matMenuTriggerFor]="userMenu">
         <mat-icon>account_circle</mat-icon>
     </button>
 
     <mat-menu #userMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/profile']">
+            <mat-icon>person</mat-icon>
+            <span>Perfil</span>
+        </button>
         <button mat-menu-item (click)="logout()">
             <mat-icon>exit_to_app</mat-icon>
             <span>Cerrar Sesión</span>

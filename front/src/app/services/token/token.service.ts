@@ -4,38 +4,42 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TokenService {
-  private readonly TOKEN_KEY = 'auth_token';
-  private readonly USER_KEY = 'auth_user';
-
-  constructor() {}
+  private readonly TOKEN_KEY = 'authToken';
+  private readonly USER_KEY = 'authUser';
 
   saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    if (typeof window !== 'undefined')
+      localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    if (typeof window !== 'undefined')
+      return localStorage.getItem(this.TOKEN_KEY);
+    return null;
   }
 
   removeToken(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
+    if (typeof window !== 'undefined') localStorage.removeItem(this.TOKEN_KEY);
   }
 
   saveUser(user: any): void {
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    if (typeof window !== 'undefined')
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
   getUser(): any {
-    const user = localStorage.getItem(this.USER_KEY);
-    return user ? JSON.parse(user) : null;
+    if (!(typeof window !== 'undefined')) {
+      const user = localStorage.getItem(this.USER_KEY);
+      return user ? JSON.parse(user) : null;
+    }
   }
 
   removeUser(): void {
-    localStorage.removeItem(this.USER_KEY);
+    if (typeof window !== 'undefined') localStorage.removeItem(this.USER_KEY);
   }
 
   clear(): void {
-    localStorage.clear();
+    if (typeof window !== 'undefined') localStorage.clear();
   }
 
   isLoggedIn(): boolean {
