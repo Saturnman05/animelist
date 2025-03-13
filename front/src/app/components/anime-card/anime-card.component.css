@@ -17,6 +17,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   transition: box-shadow 0.3s;
+  margin-bottom: 1rem;
 }
 
 .display-card:hover {
