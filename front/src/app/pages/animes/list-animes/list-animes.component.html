@@ -1,2 +1,6 @@
 <app-nav-bar />
+@if (loading) {
+<div>loading...</div>
+} @else {
 <app-anime-grid [animes]="animes"></app-anime-grid>
+}
