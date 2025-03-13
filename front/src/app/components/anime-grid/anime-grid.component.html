@@ -1,9 +1,9 @@
 <div class="anime-grid-container">
     <div class="anime-grid">
-        @for (anime of animes; track anime.title) {
+        @for (anime of animes; track anime.id) {
         <app-anime-card [anime]="anime" />
         } @empty {
-        <div>Loading...</div>
+        <mat-spinner></mat-spinner>
         }
     </div>
 </div>

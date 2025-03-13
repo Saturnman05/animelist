@@ -13,6 +13,7 @@ import { AnimeGridComponent } from '../../../components/anime-grid/anime-grid.co
 export class ListAnimesComponent {
   animes: Anime[] = [
     {
+      id: '1',
       title:
         'Shingeki no Kyojin fsadf fasdfdsa asdfsadf sadfasdf sadfsdaf dsafasdf',
       genre: 'Action',
@@ -22,6 +23,7 @@ export class ListAnimesComponent {
         'https://th.bing.com/th/id/OIP.-H-kZ8eWI-WdPoulO34xnAHaKe?rs=1&pid=ImgDetMain',
     },
     {
+      id: '2',
       title: 'Death Note',
       genre: 'Mistery',
       author: 'Tsugumi Oba & Takeshi Obata',
@@ -30,6 +32,7 @@ export class ListAnimesComponent {
         'https://m.media-amazon.com/images/M/MV5BNjRiNmNjMmMtN2U2Yi00ODgxLTk3OTMtMmI1MTI1NjYyZTEzXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg',
     },
     {
+      id: '3',
       title: 'Jujutsu Kaisen',
       genre: 'Action',
       author: 'Gege Akutami',

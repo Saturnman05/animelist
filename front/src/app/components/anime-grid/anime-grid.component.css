@@ -11,6 +11,29 @@
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
   justify-content: center;
+  min-height: 300px; /* Asegura que haya espacio para el spinner incluso sin contenido */
+}
+
+/* Estilos específicos para cuando la grilla está vacía */
+.anime-grid:empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos para el spinner */
+mat-spinner {
+  margin: 0 auto;
+  grid-column: 1 / -1; /* Hace que el spinner ocupe todas las columnas de la grilla */
+  justify-self: center;
+}
+
+/* Para el caso específico del @empty en Angular */
+.anime-grid:has(mat-spinner) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px; /* Un poco más de espacio para cuando está cargando */
 }
 
 /* Responsive adjustments */
