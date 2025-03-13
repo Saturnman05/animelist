@@ -46,7 +46,7 @@ export class ListAnimesComponent implements OnInit {
 
   animeService = inject(JikanAnimeService);
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.loading = true;
     this.animeService.getAnimes().subscribe({
       next: (mappedAnimes) => {

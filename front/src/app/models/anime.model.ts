@@ -13,7 +13,7 @@ export interface JikanResponse {
   pagination: {
     last_visible_page: number;
     has_next_page: boolean;
-    // Otros campos de paginación
+    current_page: number;
   };
 }
 
@@ -38,3 +38,5 @@ export interface JikanAnime {
   }[];
   // Otros campos que vienen en la respuesta
 }
+
+export type JikanAnimeResponse = JikanAnime & JikanResponse;

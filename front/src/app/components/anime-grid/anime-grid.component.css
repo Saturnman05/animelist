@@ -4,9 +4,12 @@
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 .anime-grid {
+  max-width: 55rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
