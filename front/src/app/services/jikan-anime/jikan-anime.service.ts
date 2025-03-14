@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
-import { TokenService } from '../token/token.service';
-import { firstValueFrom, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Anime, JikanAnime, JikanResponse } from '../../models/anime.model';
 
 @Injectable({
@@ -12,27 +11,7 @@ import { Anime, JikanAnime, JikanResponse } from '../../models/anime.model';
 export class JikanAnimeService {
   private readonly API_URL = `${environment.jikanApiUrl}/anime`;
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {}
-
-  async getAllAnimes(): Promise<JikanResponse> {
-    let page = 2;
-    let hasNextPage = true;
-    let response: JikanResponse;
-
-    response = await firstValueFrom(this.http.get<JikanResponse>(this.API_URL));
-
-    while (hasNextPage === true) {
-      let newResponse = await firstValueFrom(
-        this.http.get<JikanResponse>(`${this.API_URL}?page=${page}`)
-      );
-
-      newResponse.data.forEach((anime) => {
-        response.data.push(anime);
-      });
-    }
-
-    return response;
-  }
+  constructor(private http: HttpClient) {}
 
   getAnimes(
     page: number = 1,

@@ -1,18 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AnimeCardComponent } from '../anime-card/anime-card.component';
 import { Anime } from '../../models/anime.model';
-import { Subscription } from 'rxjs';
 import { JikanAnimeService } from '../../services/jikan-anime/jikan-anime.service';
 
 @Component({
@@ -21,16 +12,11 @@ import { JikanAnimeService } from '../../services/jikan-anime/jikan-anime.servic
   templateUrl: './anime-grid.component.html',
   styleUrl: './anime-grid.component.css',
 })
-export class AnimeGridComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AnimeGridComponent implements OnInit {
   animes: Anime[] = [];
   currentPage = 1;
   hasMoreAnimes = true;
   loading = false;
-
-  private observer: IntersectionObserver | null = null;
-  private subscription: Subscription | null = null;
-
-  @ViewChild('scrollTrigger') scrollTrigger?: ElementRef;
 
   constructor(private animeService: JikanAnimeService) {}
 
@@ -38,78 +24,31 @@ export class AnimeGridComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loadAnimes();
   }
 
-  ngAfterViewInit(): void {
-    this.setupIntersectionObserver();
-  }
+  onPageScroll(event: any): void {
+    console.log(event);
+    const scrollTop = event.target.scrollTop;
+    const scrollHeight = event.target.scrollHeight;
+    const offsetHeight = event.target.offsetHeight;
 
-  ngOnDestroy(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (scrollHeight - (scrollTop + offsetHeight) < 50 && !this.loading) {
+      this.currentPage++;
+      this.loadAnimes();
     }
   }
 
-  private setupIntersectionObserver() {
-    if (!this.scrollTrigger) return;
-
-    console.log('holaaa');
-
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1,
-    };
-
-    this.observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      if (entry.isIntersecting && !this.loading && this.hasMoreAnimes) {
-        this.loadMoreAnimes();
-      }
-    }, options);
-
-    this.observer.observe(this.scrollTrigger.nativeElement);
-  }
-
-  private loadAnimes() {
+  loadAnimes() {
     this.loading = true;
 
-    this.subscription = this.animeService
-      .getAnimes(this.currentPage)
-      .subscribe({
-        next: (result) => {
-          this.animes = result.animes;
-          this.hasMoreAnimes = result.hasNextPage;
-          this.loading = false;
-        },
-        error: (error) => {
-          console.error('Error al cargar animes:', error);
-          this.loading = false;
-        },
-      });
-  }
-
-  private loadMoreAnimes() {
-    if (this.loading || !this.hasMoreAnimes) return;
-
-    this.loading = true;
-    this.currentPage++;
-
-    this.subscription = this.animeService
-      .getAnimes(this.currentPage)
-      .subscribe({
-        next: (result) => {
-          this.animes = [...this.animes, ...result.animes];
-          this.hasMoreAnimes = result.hasNextPage;
-          this.loading = false;
-        },
-        error: (error) => {
-          console.error('Error al cargar más animes:', error);
-          this.loading = false;
-          this.currentPage--;
-        },
-      });
+    this.animeService.getAnimes(this.currentPage).subscribe({
+      next: (data: { animes: Anime[]; hasNextPage: boolean }) => {
+        this.animes = [...this.animes, ...data.animes];
+        this.loading = false;
+        this.hasMoreAnimes = data.hasNextPage;
+      },
+      error: (error) => {
+        console.error('Error:', error);
+        this.loading = false;
+      },
+    });
   }
 }

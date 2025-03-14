@@ -1,9 +1,10 @@
-/* anime-grid.component.css */
-
 .anime-grid-container {
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+  height: 90%;
+  overflow-y: auto;
+  border: 1px solid #ccc;
   display: flex;
   justify-content: center;
 }
@@ -14,14 +15,7 @@
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
   justify-content: center;
-  min-height: 300px; /* Asegura que haya espacio para el spinner incluso sin contenido */
-}
-
-/* Estilos específicos para cuando la grilla está vacía */
-.anime-grid:empty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100rem;
 }
 
 /* Estilos para el spinner */
