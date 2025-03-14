@@ -25,7 +25,8 @@ export class AnimeGridComponent implements OnInit {
   }
 
   onPageScroll(event: any): void {
-    console.log(event);
+    if (this.loading) return;
+
     const scrollTop = event.target.scrollTop;
     const scrollHeight = event.target.scrollHeight;
     const offsetHeight = event.target.offsetHeight;
