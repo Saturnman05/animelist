@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 
 import { NavBarComponent } from '../../../components/nav-bar/nav-bar.component';
 import { AuthService } from '../../../services/auth/auth.service';
+import { TokenService } from '../../../services/token/token.service';
+import { UserService } from '../../../services/user/user.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -30,10 +33,51 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
   private fieldsDisabled: boolean = true;
+  private userData: User | null = null;
 
   private AuthService = inject(AuthService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private userService = inject(UserService);
+
+  private initForm(): void {
+    this.profileForm = this.fb.group({
+      username: [
+        {
+          value: this.userData?.username || '...loading',
+          disabled: this.fieldsDisabled,
+        },
+        Validators.required,
+      ],
+      email: [
+        {
+          value: this.userData?.email || '...loading',
+          disabled: this.fieldsDisabled,
+        },
+        Validators.required,
+      ],
+    });
+
+    this.loadUserData();
+  }
+
+  private loadUserData(): void {
+    this.userService.getMyUser().subscribe({
+      next: (user) => {
+        this.userData = user;
+
+        this.profileForm.controls['username'].setValue(
+          this.userData?.username || 'ERROR'
+        );
+        this.profileForm.controls['email'].setValue(
+          this.userData?.email || 'ERROR'
+        );
+      },
+      error: (err) => {
+        console.error('Error obteniendo mi usuario', err);
+      },
+    });
+  }
 
   ngOnInit(): void {
     if (!this.AuthService.isAuthenticated$) {
@@ -42,19 +86,6 @@ export class ProfileComponent implements OnInit {
     }
 
     this.initForm();
-  }
-
-  private initForm(): void {
-    this.profileForm = this.fb.group({
-      username: [
-        { value: 'Username', disabled: this.fieldsDisabled },
-        Validators.required,
-      ],
-      email: [
-        { value: 'Email@email.com', disabled: this.fieldsDisabled },
-        Validators.required,
-      ],
-    });
   }
 
   onChangeDisabled(): void {
