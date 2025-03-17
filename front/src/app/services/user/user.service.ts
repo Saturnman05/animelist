@@ -28,4 +28,13 @@ export class UserService {
       },
     });
   }
+
+  updateUser() {
+    const body = {};
+    const headers = {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${this.tokenService.getToken()}`,
+    };
+    this.http.put(`${this.API_URL}`, body, { headers });
+  }
 }
