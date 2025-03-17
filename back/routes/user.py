@@ -33,7 +33,6 @@ async def get_usuarios(current_user: User = Depends(get_current_user)):
     try:
         async with await Database.get_connection() as con:
             async with con.cursor(DictCursor) as cursor:
-                cursor = await con.cursor(DictCursor)
                 await cursor.execute("CALL sp_users(NULL, NULL, NULL, NULL, %s)", (1,))
                 results = await cursor.fetchall()
 
@@ -41,6 +40,25 @@ async def get_usuarios(current_user: User = Depends(get_current_user)):
             raise HTTPException(status_code=400, detail="Usuarios no encontrados")
         return results
     except ConectionError as e:
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+
+@router.get("/my_user")
+async def get_my_user(current_user: User = Depends(get_current_user)):
+    try:
+        async with await Database.get_connection() as con:
+            async with con.cursor(DictCursor) as cursor:
+                await cursor.execute(
+                    "CALL sp_users(%s, NULL, NULL, NULL , %s)",
+                    (current_user.user_id, 2),
+                )
+                user = await cursor.fetchone()
+
+        if not user:
+            raise HTTPException(status_code=400, detail="Usuario no encontrado")
+
+        return user
+    except ConnectionError as e:
         raise HTTPException(status_code=500, detail=f"Error: {e}")
 
 
