@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +17,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 @Component({
   selector: 'app-profile',
   imports: [
+    MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -23,10 +25,11 @@ import { AuthService } from '../../../services/auth/auth.service';
     ReactiveFormsModule,
   ],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css',
+  styleUrl: '../login/login.component.scss',
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
+  private fieldsDisabled: boolean = true;
 
   private AuthService = inject(AuthService);
   private fb = inject(FormBuilder);
@@ -43,9 +46,28 @@ export class ProfileComponent implements OnInit {
 
   private initForm(): void {
     this.profileForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', Validators.required],
+      username: [
+        { value: 'Username', disabled: this.fieldsDisabled },
+        Validators.required,
+      ],
+      email: [
+        { value: 'Email@email.com', disabled: this.fieldsDisabled },
+        Validators.required,
+      ],
     });
+  }
+
+  onChangeDisabled(): void {
+    this.fieldsDisabled = !this.fieldsDisabled;
+
+    if (this.fieldsDisabled) {
+      this.profileForm.controls['username'].disable();
+      this.profileForm.controls['email'].disable();
+      return;
+    }
+
+    this.profileForm.controls['username'].enable();
+    this.profileForm.controls['email'].enable();
   }
 
   onSubmit(): void {

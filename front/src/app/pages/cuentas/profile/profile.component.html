@@ -11,13 +11,17 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
+                    <mat-label>Email</mat-label>
                     <input matInput formControlName="email" name="email" type="email" required>
                 </mat-form-field>
 
-                <div class="login-navigations">
-                    <a mat-button>Recuperar contraseña</a>
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput name="password" type="password" [defaultValue]="'password'" [disabled]="true"
+                        required>
+                </mat-form-field>
+
+                <button mat-flat-button (click)="onChangeDisabled()">Edit</button>
             </form>
         </mat-card-content>
     </mat-card>
