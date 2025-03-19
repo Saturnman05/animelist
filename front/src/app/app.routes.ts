@@ -12,5 +12,5 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'animes', component: ListAnimesComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }, // TODO: Crear página de error
 ];
