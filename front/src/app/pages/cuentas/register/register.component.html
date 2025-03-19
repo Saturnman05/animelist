@@ -1,1 +1,41 @@
-<p>register works!</p>
+<div class="login-father">
+    <mat-card class="login-container">
+        <mat-card-title>Crear Usuario</mat-card-title>
+
+        <mat-card-content>
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" name="username" type="text" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" name="email" type="email" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" name="password" type="password" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput formControlName="confirmPassword" name="confirmPassword" type="password" required>
+                </mat-form-field>
+
+                @if (isLoading) {
+                <button mat-flat-button color="primary"><mat-spinner diameter="25" /></button>
+                } @else {
+                <button mat-flat-button color="primary" type="submit">
+                    Register
+                </button>
+                }
+
+                <div class="login-navigations">
+                    <a mat-button [routerLink]="['/login']">Iniciar sesión</a>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

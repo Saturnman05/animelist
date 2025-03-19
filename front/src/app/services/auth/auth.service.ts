@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { LoginRequest } from '../../models/login-request.model';
 import { LoginResponse } from '../../models/login-response.model';
 import { TokenService } from '../token/token.service';
+import { RegisterRequest, RegisterResponse } from '../../models/register.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,18 @@ export class AuthService {
   constructor(private http: HttpClient, private tokenService: TokenService) {
     // Check if the user is already logged in when the service is initialized
     this.isAuthenticatedSubject.next(this.tokenService.isLoggedIn());
+  }
+
+  register(credentials: RegisterRequest): Observable<RegisterResponse> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+    });
+
+    return this.http.post<RegisterResponse>(
+      `${this.API_URL}/register`,
+      credentials,
+      { headers }
+    );
   }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
