@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AnimeCardComponent } from '../anime-card/anime-card.component';
 import { Anime } from '../../models/anime.model';
 import { JikanAnimeService } from '../../services/jikan-anime/jikan-anime.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-anime-grid',
@@ -18,7 +19,8 @@ export class AnimeGridComponent implements OnInit {
   hasMoreAnimes = true;
   loading = false;
 
-  constructor(private animeService: JikanAnimeService) {}
+  private animeService = inject(JikanAnimeService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.loadAnimes();
@@ -37,7 +39,7 @@ export class AnimeGridComponent implements OnInit {
     }
   }
 
-  loadAnimes() {
+  loadAnimes(): void {
     this.loading = true;
 
     this.animeService.getAnimes(this.currentPage).subscribe({
@@ -51,5 +53,9 @@ export class AnimeGridComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  detail(animeId: number): void {
+    this.router.navigate([`/detail-anime/${animeId}`]);
   }
 }
