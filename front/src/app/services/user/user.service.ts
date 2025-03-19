@@ -29,12 +29,11 @@ export class UserService {
     });
   }
 
-  updateUser() {
-    const body = {};
+  updateUser(user: User): Observable<void> {
     const headers = {
       'Content-type': 'application/json',
       Authorization: `Bearer ${this.tokenService.getToken()}`,
     };
-    this.http.put(`${this.API_URL}`, body, { headers });
+    return this.http.put<void>(`${this.API_URL}`, user, { headers });
   }
 }

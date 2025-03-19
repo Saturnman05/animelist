@@ -1,6 +1,6 @@
 <app-nav-bar />
-<div class="login-father">
-    <mat-card class="login-container">
+<div class="profile-father">
+    <mat-card class="profile-container">
         <mat-card-title>Perfil</mat-card-title>
 
         <mat-card-content>
@@ -21,7 +21,19 @@
                         required>
                 </mat-form-field>
 
-                <button mat-flat-button (click)="onChangeDisabled()">Edit</button>
+                <div class="profile-buttons">
+                    @if (!isEditing) {
+                    <button mat-flat-button color="primary" (click)="onChangeEnabled()" type="button">Edit</button>
+                    } @else {
+                    <button mat-flat-button color="primary" (click)="onChangeDisabled()" type="button">Cancel</button>
+                    }
+
+                    @if (!isLoading) {
+                    <button mat-flat-button color="primary" type="submit" [disabled]="!isEditing">Confirm</button>
+                    } @else {
+                    <button mat-flat-button color="primary"><mat-spinner diameter="25" /></button>
+                    }
+                </div>
             </form>
         </mat-card-content>
     </mat-card>

@@ -1,0 +1,38 @@
+.profile-father {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+mat-card-title {
+  margin-bottom: 2rem;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #ffffff;
+}
+
+.profile-navigations {
+  margin-top: 1rem;
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 5rem;
+}
