@@ -1,22 +1,13 @@
 from aiomysql import Error as ConnectionError, DictCursor
-
 from datetime import timedelta
-
 from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
-from pydantic import BaseModel
-
 from database import Database
+from models.auth import Token
 from models.user import UserCreate
 from utils.hash_password import hash_password, verify_password
 from utils.security import create_access_token
-
-
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
 
 router = APIRouter()
 
