@@ -1,9 +1,9 @@
 from aiomysql import Error as ConectionError, DictCursor
-
 from fastapi import APIRouter, HTTPException, Depends
 
 from database import Database
-from models.user import User, UserCreate, UserUpdate
+from models.user import User, UserCreate, UserUpdate, UserChangePassword
+from utils import hash_password
 from utils.security import get_current_user
 
 router = APIRouter()
@@ -43,6 +43,7 @@ async def get_usuarios(current_user: User = Depends(get_current_user)):
         raise HTTPException(status_code=500, detail=f"Error: {e}")
 
 
+# GET my user
 @router.get("/my_user")
 async def get_my_user(current_user: User = Depends(get_current_user)):
     try:
@@ -117,13 +118,31 @@ async def eliminar_usuario(
         raise HTTPException(status_code=500, detail=f"Error: {e}")
 
 
+# PUT change password
+@router.put("/change_password")
+async def change_password(
+    user: UserChangePassword, current_user: User = Depends(get_current_user)
+):
+    try:
+        async with await Database.get_connection() as con:
+            async with con.cursor(DictCursor) as cursor:
+                await cursor.execute(
+                    "CALL sp_users(%s, NULL, NULL, %s, %s)",
+                    (current_user.user_id, hash_password(user.password), 6),
+                )
+            await con.commit()
+        return {"message": "Contraseña acutalizada"}
+    except ConnectionError as e:
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+
 @router.post("/recover_password")
 async def recover_password(email: str):
     try:
         async with await Database.get_connection() as con:
             async with con.cursor(DictCursor) as cursor:
                 await cursor.execute(
-                    "CALL sp_users(NULL, NULL, %s, NULL, %s)", (email, 6)
+                    "CALL sp_users(NULL, NULL, %s, NULL, %s)", (email, 7)
                 )
             await con.commit()
         return {"message": "Contrseña cambiada"}
