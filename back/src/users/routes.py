@@ -8,14 +8,12 @@ router = APIRouter()
 
 
 @router.post("/")
-async def crear_usuario(
-    user: UserCreate, current_user: User = Depends(get_current_user)
-):
+async def crear_usuario(user: UserCreate, _: User = Depends(get_current_user)):
     return await UserService.create_user(user)
 
 
 @router.get("/")
-async def get_usuarios(current_user: User = Depends(get_current_user)):
+async def get_usuarios(_: User = Depends(get_current_user)):
     return await UserService.get_all_users()
 
 
@@ -25,21 +23,17 @@ async def get_my_user(current_user: User = Depends(get_current_user)):
 
 
 @router.get("/{user_id}")
-async def obtener_usuario(user_id: str, current_user: User = Depends(get_current_user)):
+async def obtener_usuario(user_id: str, _: User = Depends(get_current_user)):
     return await UserService.get_user_by_id(user_id)
 
 
 @router.put("/")
-async def actualizar_usuario(
-    user: UserUpdate, current_user: User = Depends(get_current_user)
-):
+async def actualizar_usuario(user: UserUpdate, _: User = Depends(get_current_user)):
     return await UserService.update_user(user)
 
 
 @router.delete("/{user_id}")
-async def eliminar_usuario(
-    user_id: str, current_user: User = Depends(get_current_user)
-):
+async def eliminar_usuario(user_id: str, _: User = Depends(get_current_user)):
     return await UserService.delete_user(user_id)
 
 
