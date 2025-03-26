@@ -18,15 +18,15 @@ async def get_genre(genre_id: str):
 
 
 @router.post("/")
-async def post_genre(genre: GenreCreate, current_user: str = Depends(get_current_user)):
+async def post_genre(genre: GenreCreate, _: str = Depends(get_current_user)):
     return await GenreService.create_genre(genre)
 
 
 @router.put("/")
-async def put_genre(genre: GenreUpdate, current_user: str = Depends(get_current_user)):
+async def put_genre(genre: GenreUpdate, _: str = Depends(get_current_user)):
     return await GenreService.update_genre(genre)
 
 
 @router.delete("/{genre_id}")
-async def delete_genre(genre_id: str, current_user: str = Depends(get_current_user)):
+async def delete_genre(genre_id: str, _: str = Depends(get_current_user)):
     return await GenreService.delete_genre(genre_id)
