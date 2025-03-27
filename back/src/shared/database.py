@@ -1,10 +1,11 @@
 import aiomysql
 from aiomysql import Error as ConnectionError
+from aiomysql.connection import _ConnectionContextManager
 
 from shared.consts import DATABASE_HOST, DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD
 
 
-async def get_db_connection():
+async def get_db_connection() -> _ConnectionContextManager | None:
     try:
         connection = await aiomysql.connect(
             host=DATABASE_HOST,
