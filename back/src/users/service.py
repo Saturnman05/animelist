@@ -2,8 +2,8 @@ from aiomysql import Error as ConectionError, DictCursor
 from fastapi import HTTPException
 
 from .models import User, UserCreate, UserUpdate, UserChangePassword
-from shared.database import Database
-from shared.hash_password import hash_password
+from src.shared.database import Database
+from src.shared.hash_password import hash_password
 
 
 class UserService:

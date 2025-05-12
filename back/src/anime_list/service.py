@@ -2,8 +2,8 @@ from aiomysql import Error as ConnectionError, DictCursor
 from fastapi import HTTPException
 
 from .models import AnimeListCreate, AnimeListUpdate
-from shared.database import Database
-from users.models import User
+from src.shared.database import Database
+from src.users.models import User
 
 
 class AnimeListService:

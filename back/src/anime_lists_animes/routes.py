@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends
 
 from .models import AnimeListsAnimes
 from .service import AnimeListsAnimesService
-from shared.security import get_current_user
-from users.models import User
+from src.shared.security import get_current_user
+from src.users.models import User
 
 router = APIRouter()
 

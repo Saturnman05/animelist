@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
 from .service import AuthService
-from users.models import UserCreate
+from src.users.models import UserCreate
 
 router = APIRouter()
 

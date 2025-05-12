@@ -2,7 +2,7 @@ from aiomysql import Error as ConnectionError, DictCursor
 from fastapi import HTTPException
 
 from .models import GenreCreate, GenreUpdate
-from shared.database import Database
+from src.shared.database import Database
 
 
 class GenreService:

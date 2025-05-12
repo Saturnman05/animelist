@@ -4,10 +4,10 @@ from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
 from .models import Token
-from shared.database import Database
-from shared.hash_password import hash_password, verify_password
-from shared.security import create_access_token
-from users.models import UserCreate
+from src.shared.database import Database
+from src.shared.hash_password import hash_password, verify_password
+from src.shared.security import create_access_token
+from src.users.models import UserCreate
 
 
 class AuthService:

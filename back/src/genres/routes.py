@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from .models import GenreCreate, GenreUpdate
 from .service import GenreService
-from shared.security import get_current_user
+from src.shared.security import get_current_user
 
 router = APIRouter()
 

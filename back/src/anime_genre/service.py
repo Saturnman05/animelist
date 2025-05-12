@@ -1,8 +1,8 @@
 from aiomysql import Error as ConnectionError, DictCursor
 from fastapi import APIRouter, Depends, HTTPException
 
-from shared.database import Database
-from shared.security import get_current_user
+from src.shared.database import Database
+from src.shared.security import get_current_user
 from .models import AnimeGenre
 
 

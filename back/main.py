@@ -1,16 +1,16 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
-from shared.database import Database
+from src.shared.database import Database
 
-from test_vercel.routes import router as test_vercel_router
-from users.routes import router as user_router
-from auth.routes import router as auth_router
-from genres.routes import router as genre_router
-from anime_list.routes import router as list_router
-from anime_genre.routes import router as anime_genre_router
-from animes.routes import router as anime_router
-from anime_lists_animes.routes import router as anime_lists_animes_router
+from src.test_vercel.routes import router as test_vercel_router
+from src.users.routes import router as user_router
+from src.auth.routes import router as auth_router
+from src.genres.routes import router as genre_router
+from src.anime_list.routes import router as list_router
+from src.anime_genre.routes import router as anime_genre_router
+from src.animes.routes import router as anime_router
+from src.anime_lists_animes.routes import router as anime_lists_animes_router
 
 from fastapi.middleware.cors import CORSMiddleware
 
