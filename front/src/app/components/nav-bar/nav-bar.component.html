@@ -9,10 +9,10 @@
 
     <a mat-button [routerLink]="['/genres']"><span>Géneros</span></a>
 
+    @if (isLoggedIn) {
     <button mat-icon-button [matMenuTriggerFor]="userMenu">
         <mat-icon>account_circle</mat-icon>
     </button>
-
     <mat-menu #userMenu="matMenu">
         <button mat-menu-item [routerLink]="['/profile']">
             <mat-icon>person</mat-icon>
@@ -23,4 +23,15 @@
             <span>Cerrar Sesión</span>
         </button>
     </mat-menu>
+    } @else {
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>login_to_app</mat-icon>
+            <span>Iniciar Sesión</span>
+        </button>
+    </mat-menu>
+    }
 </mat-toolbar>

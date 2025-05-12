@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -24,6 +25,9 @@ import { AuthService } from '../../services/auth/auth.service';
 export class NavBarComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private tokenService = inject(TokenService);
+
+  isLoggedIn = this.tokenService.isLoggedIn();
 
   logout() {
     console.log('Cerrando sesión...');
