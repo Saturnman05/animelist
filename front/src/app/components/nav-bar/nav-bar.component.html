@@ -5,9 +5,10 @@
 
     <span class="example-spacer"></span>
 
+    @if (isLoggedIn) {
     <a mat-button [routerLink]="['/lists']"><span>Listas</span></a>
-
     <a mat-button [routerLink]="['/genres']"><span>Géneros</span></a>
+    }
 
     @if (isLoggedIn) {
     <button mat-icon-button [matMenuTriggerFor]="userMenu">
