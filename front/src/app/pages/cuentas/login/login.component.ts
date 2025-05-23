@@ -15,10 +15,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { LoginRequest } from '../../../models/login-request.model';
 import { AuthService } from '../../../services/auth/auth.service';
+import { GoBackButtonComponent } from '../../../components/go-back-button/go-back-button.component';
 
 @Component({
   selector: 'app-login',
   imports: [
+    GoBackButtonComponent,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
